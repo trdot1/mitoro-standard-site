@@ -146,6 +146,8 @@
 
   /* ABOUT */
   .about{display:grid; grid-template-columns:1fr 1.6fr; gap:40px; align-items:start;}
+  .about-side{display:flex; flex-direction:column; gap:18px;}
+  .about-photo{width:100%; aspect-ratio:1/1; object-fit:cover; border:1px solid var(--line); display:block;}
   .about-label{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em;}
   .about p{color:var(--ink-soft); font-size:0.98rem; margin-bottom:14px;}
 
@@ -348,7 +350,10 @@
   <div class="wrap">
     <div class="section-head"><span class="section-num">§05</span><h2>Who's behind this</h2></div>
     <div class="about">
-      <div class="about-label">Founder</div>
+      <div class="about-side">
+        <div class="about-label">Founder</div>
+        <img src="founder-photo.jpg" alt="Founder portrait" class="about-photo">
+      </div>
       <div>
         <p>Twenty years in technology and operations taught me how organizations actually work — where the gaps are, why teams stall, and what it takes to get execution moving again.</p>
         <p>I've spent recent years as the operational right hand at a growing company — restructuring teams, building SOPs across departments from scratch, and finding where staffing spend didn't match business need. Before that, I partnered directly with a struggling small business owner to rebuild operations and diversify revenue from the ground up.</p>
@@ -366,7 +371,11 @@
         <p>No pitch deck required. Tell me a little about what's going on in your business, and I'll tell you honestly whether the diagnostic is a fit.</p>
         <p>Most conversations start with a 20-minute call — no cost, no obligation.</p>
       </div>
-      <form data-reveal onsubmit="event.preventDefault(); this.querySelector('.submit-btn').textContent='Sent — thank you';">
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-reveal onsubmit="handleFormSubmit(event)">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none">
+          <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        </p>
         <div>
           <label for="name">Name</label>
           <input id="name" name="name" type="text" required>
@@ -384,7 +393,7 @@
           <textarea id="message" name="message" required></textarea>
         </div>
         <button type="submit" class="submit-btn">Send</button>
-        <p class="form-note">This form needs a backend (e.g. Netlify Forms or Formspree) once hosted — it doesn't send anywhere yet.</p>
+        <p class="form-note">Submissions go to Netlify Forms and show up in your Netlify dashboard.</p>
       </form>
     </div>
   </div>
@@ -403,6 +412,19 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   items.forEach(i => io.observe(i));
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    })
+      .then(() => { form.querySelector('.submit-btn').textContent = 'Sent — thank you'; })
+      .catch(() => { alert('Something went wrong — please try again or email directly.'); });
+  }
 </script>
 
 </body>
