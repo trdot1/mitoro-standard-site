@@ -160,8 +160,9 @@
 
   /* ABOUT */
   .about{display:grid; grid-template-columns:1fr 1.6fr; gap:40px; align-items:start;}
-  .about-side{display:flex; flex-direction:column; gap:18px;}
+  .about-side{display:flex; flex-direction:column; gap:14px;}
   .about-photo{width:100%; aspect-ratio:1/1; object-fit:cover; border:1px solid var(--line); display:block;}
+  .about-name{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.05rem; color:var(--ink); letter-spacing:-0.01em;}
   .about-label{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em;}
   .about p{color:var(--ink-soft); font-size:0.98rem; margin-bottom:14px;}
 
@@ -365,7 +366,8 @@
     <div class="about">
       <div class="about-side">
         <div class="about-label">Founder</div>
-        <img src="founder-photo.jpg" alt="Founder portrait" class="about-photo">
+        <img src="founder-photo.png" alt="Michael Roberson, Founder" class="about-photo">
+        <div class="about-name">Michael Roberson</div>
       </div>
       <div>
         <p>Twenty years in technology and operations taught me how organizations actually work — where the gaps are, why teams stall, and what it takes to get execution moving again.</p>
