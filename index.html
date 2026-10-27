@@ -67,7 +67,7 @@
     background:var(--accent); color:var(--panel-dark); padding:14px 26px; font-weight:600;
     transition:background .15s;
   }
-  .btn-primary:hover{background:#D89B45;}
+  .btn-primary:hover{background:#E2711F;}
   .btn-ghost{
     font-family:'IBM Plex Mono', monospace; font-size:0.88rem; text-decoration:none;
     border:1px solid var(--panel-dark-soft); color:var(--panel-dark-text); padding:14px 26px;
@@ -98,6 +98,15 @@
   .section-num{font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:0.85rem;}
   .section-head h2{font-size:1.6rem;}
 
+  /* WATCH — video is a 1080x1350 (4:5) vertical. If you swap in a different shape, change aspect-ratio below. */
+  .video-wrap{margin:0 auto;}
+  .pitch-video{
+    display:block; margin:0 auto;
+    width:100%; max-width:min(448px, calc(72vh * 0.8));
+    aspect-ratio:4 / 5; height:auto; object-fit:contain; background:#000;
+    border-radius:4px; border:1px solid var(--line);
+  }
+
   /* POSITIONING */
   .positioning p{max-width:680px; font-size:1.05rem; color:var(--ink-soft); margin-bottom:16px;}
   .fail-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:36px;}
@@ -115,7 +124,7 @@
     font-family:'IBM Plex Mono', monospace; font-size:1.3rem; color:var(--accent-deep);
     border-top:1px solid var(--line); padding-top:14px; font-weight:600;
   }
-  .case-result small{display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:0.78rem; color:var(--ink-soft); margin-top:4px;}
+  .case-result small{display:block; font-family:'Libre Franklin',sans-serif; font-weight:400; font-size:0.78rem; color:var(--ink-soft); margin-top:4px;}
   .confidentiality{font-size:0.85rem; color:var(--ink-soft); margin-top:24px; font-style:italic;}
 
   /* PROCESS */
@@ -145,7 +154,13 @@
   .offer-terms li:last-child{border-bottom:none;}
 
   /* ABOUT */
-  .about{display:grid; grid-template-columns:1fr 1.6fr; gap:40px; align-items:start;}
+  .about{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); gap:20px 40px; align-items:start;}
+  .about-photo{display:block; width:100%; max-width:320px; height:auto; border-radius:4px; border:1px solid var(--line);}
+  @media (min-width:761px){
+    .about-label{grid-column:1; grid-row:1;}
+    .about-photo{grid-column:1; grid-row:2;}
+    .about-bio{grid-column:2; grid-row:1 / span 2;}
+  }
   .about-label{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em;}
   .about p{color:var(--ink-soft); font-size:0.98rem; margin-bottom:14px;}
 
@@ -233,12 +248,11 @@
 <section id="watch">
   <div class="wrap">
     <div class="section-head"><span class="section-num">§00</span><h2>See it in action</h2></div>
-    <div style="max-width:640px; margin:0 auto;">
-      <video controls preload="metadata" style="width:100%; border-radius:4px; border:1px solid var(--line); display:block;">
+    <div class="video-wrap">
+      <video class="pitch-video" controls preload="metadata">
         <source src="Mitoro-Pitch-VO-Female.mp4" type="video/mp4">
-        Your browser doesn't support embedded video — the file is included alongside this page.
+        Your browser doesn't support embedded video.
       </video>
-      <p style="font-size:0.82rem; color:var(--ink-soft); margin-top:10px; text-align:center;">Short-form pitch, direct to camera. Swap <code>mitoro-pitch-demo.mp4</code> for the final rendered version once ready.</p>
     </div>
   </div>
 </section>
@@ -349,9 +363,8 @@
     <div class="section-head"><span class="section-num">§05</span><h2>Who's behind this</h2></div>
     <div class="about">
       <div class="about-label">Founder</div>
-      <img src="Confident Executive Office Portrait.png" alt="Founder portrait" class="about-photo">
-      </div>
-      <div>
+      <img src="Confident Executive Office Portrait.png" alt="Founder portrait" class="about-photo" width="1145" height="1374">
+      <div class="about-bio">
         <p>Twenty years in technology and operations taught me how organizations actually work — where the gaps are, why teams stall, and what it takes to get execution moving again.</p>
         <p>I've spent recent years as the operational right hand at a growing company — restructuring teams, building SOPs across departments from scratch, and finding where staffing spend didn't match business need. Before that, I partnered directly with a struggling small business owner to rebuild operations and diversify revenue from the ground up.</p>
         <p>The Mitoro Standard exists because that same pattern — diagnose what's broken, build the structure that fixes it — keeps producing results wherever I apply it. This is that pattern, offered as a bounded, fixed-scope engagement.</p>
